@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 
 export default function Data({ dataNum, nextTen = () => { } }) {
 
+
  const [latOne, inView] = useInView({
   /* Optional options */
   triggerOnce: true,
@@ -15,6 +16,8 @@ export default function Data({ dataNum, nextTen = () => { } }) {
    nextTen(inView)
   }
  }, [inView])
+
+
 
  return (
   <Table striped bordered hover variant="dark">

@@ -51,6 +51,25 @@ function App() {
   }
  }, [page, error])
 
+ const deleteError = (d) => {
+  let r = Math.floor(Math.random() * d.length)
+  d.splice(r, 1)
+ }
+ const addError = () => { }
+ const swapError = () => { }
+
+ const insertError = (e) => { 
+  let wrongDatas = allData.length * e
+  for (let i = 0; i < wrongDatas; i++) {
+   let r = Math.floor(Math.random() * allData)
+   
+  }
+ }
+
+
+
+
+
  return (
   <div className="App" style={{ padding: "100px 50px " }}>
    <Header
