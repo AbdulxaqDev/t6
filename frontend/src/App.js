@@ -4,12 +4,18 @@ import Data from "./components/Data";
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
 
+
 function App() {
  const [country, setCountry] = useState("fr");
  const [rnn, setRnn] = useState("");
  const [error, setError] = useState(0);
  const [allData, setAllData] = useState([]);
  const [page, setPage] = useState(1);
+
+ const nextTen = (p) => { 
+  setPage(page + 1)
+  // generateData(rnn, country)
+ }
 
  const selectedCountry = (c) => {
   generateData(rnn, c);
@@ -20,7 +26,6 @@ function App() {
   setRnn(r);
  };
  const errors = (e) => {
-  generateData();
   setError(e);
  };
 
@@ -37,13 +42,14 @@ function App() {
     faker.phone.number(),
    ]);
   }
-  // page === 1 ? setAllData([...all]) : setAllData([...allData, ...all])
   setAllData([...all]);
  }
-
- window.addEventListener("scroll", (e) => {
-  console.log((-document.body.getBoundingClientRect().top + e.target.body.offsetHeight)%e.target.body.offsetHeight === 100);
- });
+ 
+ useEffect(() => {
+  if (page > 1) {
+   generateData(rnn, country, page)
+  }
+ }, [page, error])
 
  return (
   <div className="App" style={{ padding: "100px 50px " }}>
@@ -51,8 +57,9 @@ function App() {
     selectedCountry={selectedCountry}
     randomNumber={randomNumber}
     errors={errors}
+    allData={ allData}
    />
-   <Data dataNum={allData} />
+   <Data dataNum={allData} nextTen={nextTen} />
   </div>
  );
 }

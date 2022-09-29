@@ -5,12 +5,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function Header({
  selectedCountry = () => {},
  randomNumber = () => {},
  getCsv = () => {},
  errors = () => {},
+ allData,
 }) {
  const [country, setCountry] = useState("Choose country");
  const [rnn, setRnn] = useState("");
@@ -18,9 +20,9 @@ export default function Header({
  const randomRange = 10_000_000;
  let countries = [
   { "Unated States": "en_US" },
-  { "French": "fr" },
-  { "Georgian": "ge" },
-  { "Japanese": "ja" },
+  { French: "fr" },
+  { Georgian: "ge" },
+  { Japanese: "ja" },
  ];
 
  useEffect(() => {
@@ -35,7 +37,7 @@ export default function Header({
    style={{
     backgroundColor: "#32353850",
     backdropFilter: "blur(10px)",
-    position: "absolute",
+    position: "fixed",
     left: 0,
     top: 0,
     width: "100%",
@@ -75,8 +77,8 @@ export default function Header({
        aria-label="Recipient's username"
        aria-describedby="basic-addon2"
        value={rnn}
-       onChange={(e) => { 
-        setRnn(e.target.value)
+       onChange={(e) => {
+        setRnn(e.target.value);
         randomNumber(e.target.value);
        }}
       />
@@ -123,9 +125,12 @@ export default function Header({
       />
      </Nav>
      <Nav className="ms-2 border p-1 rounded-2 border-secondary">
-      <Button onClick={getCsv} style={{ width: "100px" }} variant="success">
-       Get CSV
-      </Button>
+      <CSVLink data={allData}>
+       <Button onClick={getCsv} style={{ width: "100px" }} variant="success">
+        Get CSV
+       </Button>
+      </CSVLink>
+      ;
      </Nav>
     </Navbar.Collapse>
    </Container>
