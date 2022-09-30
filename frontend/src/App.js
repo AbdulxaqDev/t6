@@ -24,7 +24,6 @@ function App() {
   setRnn(r);
  };
  const errors = (e) => {
-  console.log("hrllo");
   setError(parseFloat(e));
  };
 
@@ -63,8 +62,6 @@ function App() {
 
   return errorData;
  }
-
- console.log(insertError("Hello"));
 
  function generateData(r, c, p) {
   faker.locale = c;
